@@ -15,6 +15,7 @@
             "type": "String"
         },
         "adminUsername": {
+            "defaultValue": "demouser",
             "type": "string",
             "metadata": {
               "description": "Username for the Virtual Machine."
@@ -58,7 +59,7 @@
         "actionGroups_startvm_name": {
             "defaultValue": "startvm",
             "type": "String"
-        }, 
+        },
         "activityLogAlerts_startvm_name": {
             "defaultValue": "startvm",
             "type": "String"
@@ -208,7 +209,7 @@
             },
             "tags": {
                 "Environment": "Development"
-            }      
+            }
         },
         {
             "comments": "LogicApp workflow",
@@ -386,7 +387,7 @@
             "location": "northeurope",
             "scale": null,
             "properties": {
-                "displayName": "romeel_k",
+                "displayName": "Slack API",
                 "customParameterValues": {},
                 "api": {
                     "id": "[concat('/subscriptions/',subscription().subscriptionId,'/providers/Microsoft.Web/locations/northeurope/managedApis/', parameters('connections_slack_name'))]"
@@ -500,12 +501,12 @@
                 "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_startvm_name'))]"
             ]
         }
-        
+
     ],
     "outputs": {
         "WebHookURI": {
           "type": "string",
           "value": "[listCallbackURL(concat(resourceId('Microsoft.Logic/workflows/', parameters('workflows_slacknotify_name')), '/triggers/manual'), '2016-06-01').value]"
-        }     
+        }
     }
 }
