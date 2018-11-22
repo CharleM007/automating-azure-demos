@@ -1,6 +1,13 @@
 
 .  ../login.ps1
 
+# Needs to run on Windows box
+# Unless on a Linux box with DSC for Linux installed
+# And Cloud Shell runs on a Linux box!
+
+$ErrorActionPreference = "Stop"
+$VerbosePreference = "Continue"
+
 $resourceGroup = "ms-workshop-default"
 $location = "West Europe"
 
@@ -22,3 +29,5 @@ Set-AzureRmVMDscExtension -Verbose `
     -ArchiveBlobName 'DemoServer.ps1.zip' `
     -AutoUpdate `
     -ConfigurationName 'DemoServer'
+
+# This will take ages

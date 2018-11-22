@@ -1,6 +1,12 @@
 
 
-. ..\vars.ps1
+. ..\login.ps1
+
+# Can run from Windows box
+# Can run from Cloud Shell
+
+$ErrorActionPreference = "Stop"
+$VerbosePreference = "Continue"
 
 $resourceGroup = "ms-workshop-default"
 $location = "West Europe"
@@ -74,10 +80,10 @@ $vm = Set-AzureRmVMOperatingSystem @newVmOsParams -VM $vmConfig
 $newSourceImageParams = @{
     'PublisherName' = 'MicrosoftWindowsServer'
     'Version' = 'latest'
-    'Skus' = '2012-R2-Datacenter'
+    'Skus' = '2016-Datacenter'
 }
 
-$offer = Get-AzureRmVMImageOffer -Location $location –PublisherName 'MicrosoftWindowsServer'
+$offer = Get-AzureRmVMImageOffer -Location $location -PublisherName 'MicrosoftWindowsServer'
 
 $vm = Set-AzureRmVMSourceImage @newSourceImageParams -VM $vm -Offer $offer[1].Offer
 $vm = Add-AzureRmVMNetworkInterface -VM $vm -Id $vNic.Id
@@ -92,10 +98,5 @@ $newOsDiskParams = @{
 
 $vm = Set-AzureRmVMOSDisk @newOsDiskParams -VM $vm -VhdUri $osDiskUri
 
-New-AzureRmVM -VM $vm -ResourceGroupName $resourceGroup -Location $location
+New-AzureRmVM -AsJob -VM $vm -ResourceGroupName $resourceGroup -Location $location
 
-# Delete the Resource Groups with PS
-foreach ($rg in ($resourceGroup)) {
-    Remove-AzureRmResourceGroup -Verbose -Force -AsJob `
-        -ResourceGroupName $rg
-}

@@ -1,6 +1,9 @@
 
 .  ../login.ps1
 
+$ErrorActionPreference = "Stop"
+$VerbosePreference = "Continue"
+
 $resourceGroup = "ms-workshop-imp-vs-dec"
 $location = $defaultLocation
 $storageAccountBaseName1 = "msworkshopdemostorage1"

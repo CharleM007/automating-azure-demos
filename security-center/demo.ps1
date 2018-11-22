@@ -1,7 +1,7 @@
 ##
 # Use the REST API to get SC recommendations
 ##
-.  ../login.ps1
+.  ../vars.ps1
 
 
 $authUrl = "https://login.microsoftonline.com/$($tenantId)/oauth2/token"

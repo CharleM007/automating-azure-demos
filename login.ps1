@@ -11,7 +11,7 @@ Connect-AzureRmAccount `
     -ServicePrincipal
 
 # Also log in with the az cli
-az login --service-principal -u $servicePrincipalAppId -p $password --tenant $tenantId
+# az login --service-principal -u $servicePrincipalAppId -p $password --tenant $tenantId
 
 $ErrorActionPreference = "Stop"
 $VerbosePreference = "SilentlyContinue"
