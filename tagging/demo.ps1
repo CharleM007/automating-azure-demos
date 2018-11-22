@@ -1,7 +1,8 @@
-. ..\login.ps1
 
-$resourceGroupName = "ms-workshop-posh-demo"
-$location = "West Europe"
+.  ../login.ps1
+
+$resourceGroup = "ms-workshop-posh-demo"
+$location = $defaultLocation
 $vnetName = 'msworkshop-vnet'
 $tag = @{"msworkshop"="demo"}
 $publicIpName = "rackspacemsworkshop"
@@ -10,13 +11,13 @@ $storageaccountName = "rackspacedemostorage"
 $storageAccountNum = (1,2,3,4)
 
 # Create resource group and a storage account
-New-AzureRmResourceGroup -Name $resourceGroupName -Location $location
-Write-Host "Creating Resource Group -->" $resourceGroupName -ForegroundColor Green
+New-AzureRmResourceGroup -Force -Name $resourceGroup -Location $location
+Write-Host "Creating Resource Group -->" $resourceGroup -ForegroundColor Green
 
 foreach ($item in $storageAccountNum) {
     $name = $storageaccountName+$item
     New-AzureRmStorageAccount `
-        -ResourceGroupName $resourceGroupName `
+        -ResourceGroupName $resourceGroup `
         -Name $name `
         -SkuName "Standard_LRS" `
         -Location $location
@@ -30,7 +31,7 @@ $subnet = New-AzureRmVirtualNetworkSubnetConfig `
 
 # Create a vnet
 $virtualNetwork = New-AzureRmVirtualNetwork `
-  -ResourceGroupName $resourceGroupName `
+  -ResourceGroupName $resourceGroup `
   -Location $location `
   -Name $vnetName `
   -AddressPrefix 10.0.0.0/16 `
@@ -43,12 +44,12 @@ $virtualNetwork | Set-AzureRmVirtualNetwork
 $publicIp = New-AzureRmPublicIpAddress `
     -AllocationMethod Static `
     -Name $publicIpName `
-    -ResourceGroupName $resourceGroupName `
+    -ResourceGroupName $resourceGroup `
     -DomainNameLabel $dnsPrefix `
     -Location $location `
     -Tag $tag
 
-Write-Host "Creating public ip -->" $resourceGroupName -ForegroundColor Green
+Write-Host "Creating public ip -->" $resourceGroup -ForegroundColor Green
 
 Write-Host "Public IP is: " $publicIp.IpAddress.ToString()
 
@@ -60,4 +61,9 @@ Set-AzureRmResource `
     -Tags @{"msworkshop"="demo"} `
     -ResourceGroupName "ms-workshop-posh-demo"
 
-Get-AzureRmResource -Tag @{“msworkshop”=“demo”}
+Get-AzureRmResource -Verbose `
+    -Tag @{"msworkshop"="demo"}
+
+# Delete the Resource Group with PS
+Remove-AzureRmResourceGroup -Verbose -Force -AsJob `
+    -ResourceGroupName $resourceGroup

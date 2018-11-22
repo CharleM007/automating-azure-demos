@@ -354,7 +354,7 @@
                                 "method": "post",
                                 "path": "/chat.postMessage",
                                 "queries": {
-                                    "channel": "CCPPJFRCK",
+                                    "channel": "C0PCGPCUC",
                                     "text": "VM created in Resource Group:  @{triggerBody()?['data']?['context']?['activityLog']?['resourceGroupName']} Running Status:@{triggerBody()?['data']?['context']?['activityLog']?['status']}  VM Name:@{\n\n\nsubstring(string(triggerBody()?['data']?['context']?['activityLog']?['resourceId']),add(lastIndexOf(string(triggerBody()?['data']?['context']?['activityLog']?['resourceId']),'/'),1),sub(length(triggerBody()?['data']?['context']?['activityLog']?['resourceId']), add(lastIndexOf(string(triggerBody()?['data']?['context']?['activityLog']?['resourceId']),'/'),1)))}"
 
                                 }
