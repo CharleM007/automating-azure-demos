@@ -1,8 +1,10 @@
 ##
 # Use the REST API to get SC recommendations
 ##
-.  ../vars.ps1
+.  ../login.ps1
 
+$ErrorActionPreference = "Stop"
+$VerbosePreference = "Continue"
 
 $authUrl = "https://login.microsoftonline.com/$($tenantId)/oauth2/token"
 

@@ -1,6 +1,5 @@
 
-
-. ..\login.ps1
+. ../vars.ps1
 
 # Can run from Windows box
 # Can run from Cloud Shell

@@ -6,8 +6,8 @@ $VerbosePreference = "Continue"
 
 $resourceGroup = "ms-workshop-imp-vs-dec"
 $location = $defaultLocation
-$storageAccountBaseName1 = "msworkshopdemostorage1"
-$storageAccountBaseName2 = "msworkshopdemostorage2"
+$storageAccountBaseName1 = "msworkshopdemosa1"
+$storageAccountBaseName2 = "msworkshopdemosa2"
 $storageAccountNum = (1,2,3)
 
 # Create resource groups

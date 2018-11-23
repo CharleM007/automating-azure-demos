@@ -2,6 +2,12 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
+        "slackChannelId": {
+            "type": "String",
+            "metadata": {
+              "description": "Slack channel ID, e.g. C1FFGPLUI"
+            }
+        },
         "connections_slack_name": {
             "defaultValue": "slack",
             "type": "String"
@@ -354,8 +360,8 @@
                                 "method": "post",
                                 "path": "/chat.postMessage",
                                 "queries": {
-                                    "channel": "C0PCGPCUC",
-                                    "text": "VM created in Resource Group:  @{triggerBody()?['data']?['context']?['activityLog']?['resourceGroupName']} Running Status:@{triggerBody()?['data']?['context']?['activityLog']?['status']}  VM Name:@{\n\n\nsubstring(string(triggerBody()?['data']?['context']?['activityLog']?['resourceId']),add(lastIndexOf(string(triggerBody()?['data']?['context']?['activityLog']?['resourceId']),'/'),1),sub(length(triggerBody()?['data']?['context']?['activityLog']?['resourceId']), add(lastIndexOf(string(triggerBody()?['data']?['context']?['activityLog']?['resourceId']),'/'),1)))}"
+                                    "channel": "[parameters('slackChannelId')]",
+                                    "text": "VM in Resource Group: @{triggerBody()?['data']?['context']?['activityLog']?['resourceGroupName']}\nStatus: _@{triggerBody()?['data']?['context']?['activityLog']?['status']}_\nVM: `@{substring(string(triggerBody()?['data']?['context']?['activityLog']?['resourceId']),add(lastIndexOf(string(triggerBody()?['data']?['context']?['activityLog']?['resourceId']),'/'),1),sub(length(triggerBody()?['data']?['context']?['activityLog']?['resourceId']), add(lastIndexOf(string(triggerBody()?['data']?['context']?['activityLog']?['resourceId']),'/'),1)))}`"
 
                                 }
                             }

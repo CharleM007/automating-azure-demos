@@ -3,7 +3,6 @@
 
 # Needs to run on Windows box
 # Unless on a Linux box with DSC for Linux installed
-# And Cloud Shell runs on a Linux box!
 
 $ErrorActionPreference = "Stop"
 $VerbosePreference = "Continue"
@@ -12,7 +11,7 @@ $resourceGroup = "ms-workshop-default"
 $location = "West Europe"
 
 $vmName = 'demovm01'
-$storageAccountName = 'rsworkshopdemosa01'
+$storageAccountName = 'rsworkshopdemosadsc'
 
 # Publish the configuration script to user storage
 Publish-AzureRmVMDscConfiguration -Verbose -Force `

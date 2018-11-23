@@ -1,13 +1,18 @@
 
 
-# For Mac OS
+##
+# Note, these prereqs are for Mac OS
+# You will need to do something else for Windows or Linux!
+##
+
 Install-Module -Force Az
 Import-Module Az
 # Enable AzureRM aliases for the user
 Enable-AzureRmAlias -Scope CurrentUser
 
+# The Azure CLI
 brew install azure-cli
 
-# For everyone
-Install-Module -Force powershell-yaml
-
+# Kubernetes and related
+brew install kubernetes-cli
+brew install kubernetes-helm

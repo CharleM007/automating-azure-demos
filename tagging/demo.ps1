@@ -1,14 +1,17 @@
 
 .  ../login.ps1
 
-$resourceGroup = "ms-workshop-posh-demo"
+$ErrorActionPreference = "Stop"
+$VerbosePreference = "Continue"
+
+$resourceGroup = "ms-workshop-tag"
 $location = $defaultLocation
 $vnetName = 'msworkshop-vnet'
 $tag = @{"msworkshop"="demo"}
 $publicIpName = "rackspacemsworkshop"
 $dnsPrefix = "rackspacemsworkshopdemo"
-$storageaccountName = "rackspacedemostorage"
-$storageAccountNum = (1,2,3,4)
+$storageaccountName = "msworkshopdemosatag"
+$storageAccountNum = (1,2,3)
 
 # Create resource group and a storage account
 New-AzureRmResourceGroup -Force -Name $resourceGroup -Location $location
@@ -57,9 +60,9 @@ Get-AzureRmResource –Tag @{"msworkshop"="demo"}
 
 Set-AzureRmResource `
     -ResourceType "Microsoft.Storage/storageAccounts" `
-    -Name "rackspacedemostorage1" `
+    -Name "msworkshopdemosatag1" `
     -Tags @{"msworkshop"="demo"} `
-    -ResourceGroupName "ms-workshop-posh-demo"
+    -ResourceGroupName $resourceGroup
 
 Get-AzureRmResource -Verbose `
     -Tag @{"msworkshop"="demo"}
